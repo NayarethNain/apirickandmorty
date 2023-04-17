@@ -69,6 +69,7 @@ let nombrePersonaje = document.getElementById("dato").value;
 nombrePersonaje = nombrePersonaje.toLowerCase();
 document.getElementById("tabla_principal").style.display = "none";
 document.getElementById("galeria").style.display = "none";
+document.getElementById("carta").style.display = "block";
 
 fetch(URL_CHARACTERS + '/?name=' + nombrePersonaje)
 .then(response => response.json())
