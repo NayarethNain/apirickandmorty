@@ -1,1 +1,5 @@
-/* aca estan los estilos*/
+#card {
+    width: 20%;
+    float: left;
+    text-align: center;
+}

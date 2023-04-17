@@ -2,6 +2,7 @@ const URL_BASE = 'https://rickandmortyapi.com/api'
 const URL_CHARACTERS = URL_BASE + '/character';
 let contenido;
 let carta;
+let dataImagenes;
 
 
 
@@ -41,10 +42,33 @@ function tarjeta(data) {
   }
 }
 
+function mostrarImagenes() {
+  let img = document.getElementById("galeria");
+  document.getElementById("tabla_principal").style.display = "none";
+  document.getElementById("carta").style.display = "none";
+  document.getElementById("galeria").style.display = "block";
+ 
+
+  img.innerHTML = "";
+  for (let temp of dataImagenes.results) {
+      img.innerHTML += ` 
+       <div id="card" class="card">
+      <img src="${temp.image}" class="card-img-top" alt=" imagen ${temp.name}">
+      <div class="card-body">
+        <h6 class="card-title">${temp.name}</h6>
+        <p class="card-text">${temp.species}</p>
+      </div>
+    </div>
+        
+`
+  }
+}
+
 function capturaDato () {
 let nombrePersonaje = document.getElementById("dato").value;
 nombrePersonaje = nombrePersonaje.toLowerCase();
 document.getElementById("tabla_principal").style.display = "none";
+document.getElementById("galeria").style.display = "none";
 
 fetch(URL_CHARACTERS + '/?name=' + nombrePersonaje)
 .then(response => response.json())
@@ -57,6 +81,7 @@ fetch(URL_CHARACTERS + '/?name=' + nombrePersonaje)
 
 
 
+
 $(document).ready(function () {
      contenido = document.getElementById("contenido");
      carta = document.getElementById("carta");
@@ -66,6 +91,7 @@ $(document).ready(function () {
    .then(datos => {
       console.log(datos);
       tabla(datos.results);
+      dataImagenes = datos;
     });
 
 })
